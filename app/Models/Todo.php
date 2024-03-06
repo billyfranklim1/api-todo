@@ -19,5 +19,4 @@ class Todo extends Model
         'completed' => 'boolean'
     ];
 
-
 }
