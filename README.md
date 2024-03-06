@@ -1,9 +1,13 @@
 # Todo
 
-
+A aplicação **Todo** é uma API RESTful desenvolvida com Laravel 8 e MySQL. O objetivo é fornecer um exemplo de aplicação Laravel com testes de integração. A aplicação permite criar, listar, atualizar e excluir tarefas. Ela também permite marcar uma tarefa como concluída. Podendo ser consumida por qualquer cliente que suporte requisições HTTP.
 
 ## Pré-requisitos ✅
 
+- Composer
+- Docker
+- Docker Compose
+- git
 
 **Importante:** Laravel Sail utiliza a porta `3306` para o MySQL por padrão. Certifique-se de que esta porta esteja disponível 🚦 ou ajuste a configuração conforme necessário.
 
@@ -13,13 +17,13 @@
 Para clonar o projeto, abra um terminal e execute o seguinte comando:
 
 ```bash
-git clone
+git clone https://github.com/billyfranklim1/api-todo.git
 ```
 
 🎉 Após clonar o repositório, entre no diretório do projeto:
 
 ```bash
-cd 
+cd api-todo
 ```
 
 ## Configuração Inicial 🔧
@@ -30,16 +34,18 @@ Copie o arquivo `.env.example` para `.env` para configurar o ambiente:
 cp .env.example .env
 ```
 
-Inicie os contêineres Docker com Laravel Sail 🐳:
-
-```bash
-./vendor/bin/sail up --build
-```
+## Instalação e Configuração do Laravel Sail 🚀
 
 Instale as dependências do projeto:
 
 ```bash
-./vendor/bin/sail composer install
+composer install --ignore-platform-reqs
+```
+
+Inicie os contêineres Docker com Laravel Sail 🐳:
+
+```bash
+./vendor/bin/sail up --build
 ```
 
 Gere a chave da aplicação Laravel 🔑:
@@ -70,7 +76,7 @@ Execute os testes de integração com:
 
 Se tudo estiver configurado corretamente, você verá a saída dos testes no terminal semelhante à imagem abaixo:
 <p align="center">
-  <img src="" alt="Testes de Integração" />
+  <img src="public/tests.png" alt="Testes" height="300">
 </p>
 
 
@@ -79,10 +85,6 @@ Se tudo estiver configurado corretamente, você verá a saída dos testes no ter
 
 A API estará acessível através do `http://localhost:80`.
 
-Se tudo estiver configurado corretamente, você verá a página inicial como a imagem abaixo:
-<p align="center">
-  <img src="" alt="Página Inicial" />
-</p>
 
 ## Possíveis Erros e Soluções 🛠️
 
