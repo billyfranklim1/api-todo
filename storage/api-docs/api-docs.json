@@ -1,0 +1,461 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "TODO API",
+        "description": "TODO API is a simple API to create, read, update and delete TODO items.",
+        "contact": {
+            "email": "billyfranklim@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://0.0.0.0:80",
+            "description": "Ambiente de desenvolvimento do projeto localmente"
+        }
+    ],
+    "paths": {
+        "/app": {},
+        "/api/todos": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Retorna uma lista de tarefas",
+                "description": "Retorna todas as tarefas cadastradas no banco de dados.",
+                "operationId": "8e28a9373e494bc78906c6cb218117f5",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "title teste"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "description teste"
+                                            },
+                                            "completed": {
+                                                "type": "boolean",
+                                                "example": 0
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Adiciona uma nova tarefa",
+                "description": "Cria uma nova tarefa e retorna a tarefa criada.",
+                "operationId": "addTodo",
+                "requestBody": {
+                    "description": "Dados da nova tarefa",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title teste"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "description teste"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarefa criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 19
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "title teste"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description teste"
+                                        },
+                                        "completed": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/todos/{id}": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Obtém detalhes de uma tarefa específica pelo ID",
+                "description": "Retorna os detalhes de uma única tarefa, incluindo título, descrição e status de conclusão, pelo ID.",
+                "operationId": "getTodoById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa a ser obtida",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "title teste"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description teste"
+                                        },
+                                        "completed": {
+                                            "type": "integer",
+                                            "example": 0
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - A tarefa com o ID fornecido não foi encontrada."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Atualiza uma tarefa específica",
+                "description": "Atualiza uma tarefa pelo seu ID e retorna a tarefa atualizada.",
+                "operationId": "4067c586a17a7b00f502826da9a88180",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados da tarefa a ser atualizada",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title teste editado"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "description teste editado"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tarefa atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 17
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "title teste editado"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description teste editado"
+                                        },
+                                        "completed": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Deleta uma tarefa específica pelo ID",
+                "description": "Deleta uma tarefa pelo seu ID e retorna um status de sem conteúdo.",
+                "operationId": "deleteTodo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content - A tarefa foi deletada com sucesso."
+                    },
+                    "404": {
+                        "description": "Not Found - A tarefa com o ID fornecido não foi encontrada."
+                    }
+                }
+            }
+        },
+        "/api/todos/{id}/complete": {
+            "put": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Marca uma tarefa específica como completa",
+                "description": "Atualiza o status de uma tarefa para 'completa' pelo seu ID e retorna a tarefa atualizada.",
+                "operationId": "completeTodo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa a ser marcada como completa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados opcionais da tarefa para atualização",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title teste editado"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "description teste editado"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 17
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "title teste"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description teste"
+                                        },
+                                        "completed": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - A tarefa com o ID fornecido não foi encontrada."
+                    }
+                }
+            }
+        },
+        "/api/todos/{id}/incomplete": {
+            "put": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Marca uma tarefa específica como incompleta",
+                "description": "Atualiza o status de uma tarefa para 'incompleta' pelo seu ID e retorna a tarefa atualizada.",
+                "operationId": "incompleteTodo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa a ser marcada como incompleta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados opcionais da tarefa para atualização",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "title teste editado"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "description teste editado"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 17
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "title teste"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "description teste"
+                                        },
+                                        "completed": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - A tarefa com o ID fornecido não foi encontrada."
+                    }
+                }
+            }
+        }
+    },
+    "x-tagGroups": [
+        {
+            "name": "TODO",
+            "tags": [
+                "todo"
+            ]
+        }
+    ]
+}
