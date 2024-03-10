@@ -12,11 +12,26 @@ class Todo extends Model
     protected $fillable = [
         'title',
         'description',
-        'completed'
+        'completed',
+        'ip_address'
     ];
 
     protected $casts = [
         'completed' => 'boolean'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($todo) {
+            $todo->ip_address = request()->ip();
+        });
+
+        static::addGlobalScope('ip_address', function ($builder) {
+            $builder->where('ip_address', request()->ip());
+        });
+
+    }
 
 }
