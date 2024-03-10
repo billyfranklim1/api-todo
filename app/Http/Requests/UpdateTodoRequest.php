@@ -21,7 +21,7 @@ class UpdateTodoRequest extends BaseRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['string', 'nullable'],
             'completed' => ['boolean']
         ];
     }
